@@ -18,7 +18,7 @@ public class DisplayQuestions {
     private static final Path questionsFile = Path.of(url.getFile());
 
 
-    public static void main(String[] args) throws NullPointerException, IOException {
+    public static void main(String[] args) {
 
 
         try{
@@ -27,9 +27,9 @@ public class DisplayQuestions {
             controller.init(questionsFile);
 
         } catch (NullPointerException NullPointExecption) {
-            throw new ParseException("The file gave null", NullPointExecption.hashCode());
+            throw new UnsupportedOperationException("The file gave null");
         } catch (IOException IOException) {
-            throw new ("You got a IOException", IOException.getMessage());
+            throw new UnsupportedOperationException("You got an IOException");
         }
 
 

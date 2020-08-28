@@ -165,7 +165,7 @@ class QuestionReaderTest {
 
     @Test
     void shouldThrowParseExceptionOnBadInteger() throws IOException {
-        String questionText = "xxx\tLAKES & RIVERS\tthe Jordan\n";
+        String questionText = "xxx\tLAKES & RIVERS\tthe Jordan\tthe Jordan\n";
         QuestionReader render = new QuestionReader(new StringReader(questionText));
         ParseException exception = assertThrows(ParseException.class, () -> {
             render.readQuestion();

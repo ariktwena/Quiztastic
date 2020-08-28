@@ -5,6 +5,7 @@ import quiztastic.core.Question;
 import quiztastic.domain.QuestionRepository;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class ListQuestionRepository implements QuestionRepository {
 
     }
 
-    public void addQuestionsToList(QuestionReader reader) throws IOException {
+    public void addQuestionsToList(QuestionReader reader) throws IOException, ParseException {
 
         //We add Questions to the questionsList from the QuestionReader
         questionsList.add(reader.readQuestion());
