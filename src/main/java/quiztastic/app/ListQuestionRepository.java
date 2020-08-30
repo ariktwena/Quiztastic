@@ -98,7 +98,7 @@ public class ListQuestionRepository implements QuestionRepository {
         for( int i = 0 ; i < questionsList.size() - 4 ; i++ ){
 
             //If the category name is the same on next 4 questions (5 total) we add the to the questionByCategoryList
-            if (questionsList.get(i).getCategory().equalsIgnoreCase(questionsList.get(i + 4 ).getCategory()) && questionsList.get(i).getCategory().equalsIgnoreCase(category.getCategoryName())){
+            if (questionsList.get(i).getCategory().equalsIgnoreCase(category.getCategoryName())){
 
                 //We add the questions
                 questionByCategoryList.add(questionsList.get(i));
@@ -107,8 +107,8 @@ public class ListQuestionRepository implements QuestionRepository {
                 questionByCategoryList.add(questionsList.get(i + 3));
                 questionByCategoryList.add(questionsList.get(i + 4));
 
-                //We set "i" to the last position
-                i = i + 4;
+                //We break the loop
+                break;
 
             }
 
