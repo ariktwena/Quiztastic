@@ -5,27 +5,15 @@ package quiztastic.core;
  */
 public class Board {
 
-    private  String header = "+-----------------+------+%n";
-    private  String categoryLeftAlignFormat = "| %-15s | %-4d |%n";
-    private  String separator = "+-----------------+------+%n";
-    private  String scoreLeftAlignFormatRow1 = "| %-15s | %-4d |%n";
-    private  String scoreLeftAlignFormatRow2 = "| %-15s | %-4d |%n";
-    private  String scoreLeftAlignFormatRow3 = "| %-15s | %-4d |%n";
-    private  String scoreLeftAlignFormatRow4 = "| %-15s | %-4d |%n";
-    private  String scoreLeftAlignFormatRow5 = "| %-15s | %-4d |%n";
-    private  String footer = "+-----------------+------+%n";
-
-    public Board(String header, String categoryLeftAlignFormat, String separator, String scoreLeftAlignFormatRow1, String scoreLeftAlignFormatRow2, String scoreLeftAlignFormatRow3, String scoreLeftAlignFormatRow4, String scoreLeftAlignFormatRow5, String footer) {
-        this.header = header;
-        this.categoryLeftAlignFormat = categoryLeftAlignFormat;
-        this.separator = separator;
-        this.scoreLeftAlignFormatRow1 = scoreLeftAlignFormatRow1;
-        this.scoreLeftAlignFormatRow2 = scoreLeftAlignFormatRow2;
-        this.scoreLeftAlignFormatRow3 = scoreLeftAlignFormatRow3;
-        this.scoreLeftAlignFormatRow4 = scoreLeftAlignFormatRow4;
-        this.scoreLeftAlignFormatRow5 = scoreLeftAlignFormatRow5;
-        this.footer = footer;
-    }
+    private  String header = "+--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+%n";
+    private  String categoryLeftAlignFormat = "| %-30s | %-30s | %-30s | %-30s | %-30s |%n";
+    private  String separator = "+--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+%n";
+    private  String scoreLeftAlignFormatRow1 = "| %-30s | %-30s | %-30s | %-30s | %-30s |%n";
+    private  String scoreLeftAlignFormatRow2 = "| %-30s | %-30s | %-30s | %-30s | %-30s |%n";
+    private  String scoreLeftAlignFormatRow3 = "| %-30s | %-30s | %-30s | %-30s | %-30s |%n";
+    private  String scoreLeftAlignFormatRow4 = "| %-30s | %-30s | %-30s | %-30s | %-30s |%n";
+    private  String scoreLeftAlignFormatRow5 = "| %-30s | %-30s | %-30s | %-30s | %-30s |%n";
+    private  String footer = "+--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+%n";
 
     public String getHeader() {
         return header;

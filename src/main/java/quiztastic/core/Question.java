@@ -40,4 +40,14 @@ public class Question {
     public String getAnswer() {
         return answer;
     }
+
+    @Override
+    public String toString() {
+        return "id: " + id +
+                " Score: " + score +
+                " Category: " + category +
+                " Question: " + question +
+                " Answer: " + answer
+                ;
+    }
 }

@@ -14,6 +14,7 @@ public class ListQuestionRepository implements QuestionRepository {
     //The list that holds the questions
     private final ArrayList<Question> questionsList = new ArrayList<Question>();
 
+
     public static ListQuestionRepository fromQuestionReader(QuestionReader reader){
 
         //questionsList.add(reader.readQuestion());
@@ -21,10 +22,15 @@ public class ListQuestionRepository implements QuestionRepository {
 
     }
 
-    public void addQuestionsToList(QuestionReader reader) throws IOException, ParseException {
+    public void addQuestionsToList(Question question) {
 
         //We add Questions to the questionsList from the QuestionReader
-        questionsList.add(reader.readQuestion());
+        questionsList.add(question);
+    }
+
+
+    public ArrayList<Question> getQuestionsList(){
+        return questionsList;
     }
 
 

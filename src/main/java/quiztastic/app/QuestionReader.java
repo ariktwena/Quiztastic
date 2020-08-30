@@ -16,6 +16,8 @@ import static java.lang.Integer.parseInt;
  */
 public class QuestionReader {
 
+    private int count = 0;
+
     //We set the BufferedReader til the "reader" variable
     private final BufferedReader reader;
 
@@ -39,10 +41,12 @@ public class QuestionReader {
         //We initialize the variables
         String line, category, question, answer;
         int id, score;
-        int count = 1;
 
-        //We loop through the lines until null/0 lines
-        while((line = reader.readLine()) != null){
+        //We read on line
+        line = reader.readLine();
+
+        //We check to see if the line is not null/empty
+        if(line != null){
 
             //Make a new line
             lineCounter += 1;
@@ -54,15 +58,15 @@ public class QuestionReader {
             if (token.length == 4){
 
                 try{
+                    //We increase the id count
+                    count += 1;
+
                     //We set the variables
                     id = count;
                     score = Integer.parseInt(token[0]);
                     category = token[1];
                     question = token[2];
                     answer = token[3];
-
-                    //We increase the id count
-                    count++;
 
                     //We create and return a new Question object
                     return new Question(id, score, category, question, answer);
