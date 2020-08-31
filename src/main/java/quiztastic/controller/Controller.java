@@ -79,10 +79,6 @@ public class Controller {
         hardQuestionsModList = validator.matchHardCategories(questionsModList);
 
 
-//        for( int i = 0 ; i < hardQuestionsModList.size() ; i++ ){
-//            System.out.println("Index: " + i + " " + hardQuestionsModList.get(i).toString());
-//        }
-
         System.out.println("All questions: " + (easyQuestionsModList.size() + hardQuestionsModList.size()));
         System.out.println("Easy questions: " + easyQuestionsModList.size());
         System.out.println("Hard questions: " + hardQuestionsModList.size());

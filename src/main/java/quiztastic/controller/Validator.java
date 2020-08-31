@@ -166,6 +166,10 @@ public class Validator {
 
         }
 
+//        for( int i = 0 ; i < alteredList.size() ; i++ ){
+//            System.out.println("Index: " + i + " " + alteredList.get(i).toString());
+//        }
+
         return alteredList;
 
     }

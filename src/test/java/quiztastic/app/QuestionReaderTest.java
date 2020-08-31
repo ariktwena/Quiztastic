@@ -46,7 +46,7 @@ class QuestionReaderTest {
         if(line != null){
 
             String[] token = line.toString().split(Pattern.quote("\t"));
-            assertEquals(token.length, 4);
+            assertEquals(4, token.length);
             assertEquals("100", token[0]);
             assertEquals("LAKES & RIVERS", token[1]);
             assertEquals("River mentioned most often in the Bible", token[2]);
