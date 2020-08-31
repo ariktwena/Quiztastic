@@ -70,13 +70,13 @@ public class ListQuestionRepository implements QuestionRepository {
             if (categoryList.isEmpty() || categoryList.size() == 0){
 
                 //We add the category to the category list
-                categoryList.add(new Category(questionsList.get(i).getCategory()));
+                categoryList.add(new Category(questionsList.get(i).getCategory().getCategoryName()));
 
                 //If the category list doesn't equal the earlier category, we add it to the list (We expect only 5 equal categories in a row)
-            } else if(!questionsList.get(i).getCategory().equalsIgnoreCase(categoryList.get(categoryList.size() - 1).getCategoryName())){
+            } else if(!questionsList.get(i).getCategory().getCategoryName().equalsIgnoreCase(categoryList.get(categoryList.size() - 1).getCategoryName())){
 
                 //We add the category to the category list
-                categoryList.add(new Category(questionsList.get(i).getCategory()));
+                categoryList.add(new Category(questionsList.get(i).getCategory().getCategoryName()));
 
             }
 
@@ -98,7 +98,7 @@ public class ListQuestionRepository implements QuestionRepository {
         for( int i = 0 ; i < questionsList.size() - 4 ; i++ ){
 
             //If the category name is the same on next 4 questions (5 total) we add the to the questionByCategoryList
-            if (questionsList.get(i).getCategory().equalsIgnoreCase(category.getCategoryName())){
+            if (questionsList.get(i).getCategory().getCategoryName().equalsIgnoreCase(category.getCategoryName())){
 
                 //We add the questions
                 questionByCategoryList.add(questionsList.get(i));

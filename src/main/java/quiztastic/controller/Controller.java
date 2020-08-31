@@ -200,11 +200,11 @@ public class Controller {
 
         System.out.println(board.getHeader());
         System.out.format(board.getCategoryLeftAlignFormat(),
-                list.get(cat1).getCategory(),
-                list.get(cat2).getCategory(),
-                list.get(cat3).getCategory(),
-                list.get(cat4).getCategory(),
-                list.get(cat5).getCategory());
+                list.get(cat1).getCategory().getCategoryName(),
+                list.get(cat2).getCategory().getCategoryName(),
+                list.get(cat3).getCategory().getCategoryName(),
+                list.get(cat4).getCategory().getCategoryName(),
+                list.get(cat5).getCategory().getCategoryName());
         System.out.println(board.getSeparator());
         System.out.format(board.getScoreLeftAlignFormatRow1(),
                 list.get(cat1).getScore(),

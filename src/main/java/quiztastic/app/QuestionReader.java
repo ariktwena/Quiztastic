@@ -1,5 +1,7 @@
 package quiztastic.app;
 
+
+import quiztastic.core.Category;
 import quiztastic.core.Question;
 
 import javax.imageio.IIOException;
@@ -39,7 +41,8 @@ public class QuestionReader {
     public Question readQuestion() throws IOException, ParseException {
 
         //We initialize the variables
-        String line, category, question, answer;
+        Category category;
+        String line, question, answer;
         int id, score;
 
         //We read on line
@@ -64,7 +67,7 @@ public class QuestionReader {
                     //We set the variables
                     id = count;
                     score = Integer.parseInt(token[0]);
-                    category = token[1];
+                    category = new Category(token[1]);
                     question = token[2];
                     answer = token[3];
 

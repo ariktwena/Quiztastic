@@ -144,13 +144,13 @@ public class Validator {
 
         for( int i = 0 ; i < list.size()-4 ; i++ ) {
 
-            if(list.get(i).getCategory().equals(list.get(i + 1).getCategory())
+            if(list.get(i).getCategory().getCategoryName().equals(list.get(i + 1).getCategory().getCategoryName())
                     &&
-                    list.get(i).getCategory().equals(list.get(i + 2).getCategory())
+                    list.get(i).getCategory().getCategoryName().equals(list.get(i + 2).getCategory().getCategoryName())
                     &&
-                    list.get(i).getCategory().equals(list.get(i + 3).getCategory())
+                    list.get(i).getCategory().getCategoryName().equals(list.get(i + 3).getCategory().getCategoryName())
                     &&
-                    list.get(i).getCategory().equals(list.get(i + 4).getCategory())){
+                    list.get(i).getCategory().getCategoryName().equals(list.get(i + 4).getCategory().getCategoryName())){
 
                 //We add the category entries to a new array
                 alteredList.add(list.get(i));
