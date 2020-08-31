@@ -45,7 +45,7 @@ public class Question {
     public String toString() {
         return "id: " + id +
                 " Score: " + score +
-                " Category: " + category +
+                " Category: " + category.getCategoryName() +
                 " Question: " + question +
                 " Answer: " + answer
                 ;

@@ -126,6 +126,10 @@ public class Controller {
                 hardQuestionsRandomNumbers.get(4));
 
 
+//        for( int i = 0 ; i < hardQuestionsModList.size() ; i++ ){
+//            System.out.println("Index: " + i + " " + hardQuestionsModList.get(i).toString());
+//        }
+
     }
 
     public ArrayList<Integer> generateRandomNumbers(ArrayList<Question> list){
