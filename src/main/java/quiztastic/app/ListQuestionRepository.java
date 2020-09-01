@@ -17,8 +17,8 @@ public class ListQuestionRepository implements QuestionRepository {
 
     public static ListQuestionRepository fromQuestionReader(QuestionReader reader){
 
-        //questionsList.add(reader.readQuestion());
-        return null;
+
+        throw new UnsupportedOperationException("Not implemented yet!");
 
     }
 

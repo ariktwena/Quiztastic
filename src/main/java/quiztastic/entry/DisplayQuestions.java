@@ -2,7 +2,7 @@ package quiztastic.entry;
 
 
 
-import quiztastic.controller.Controller;
+import quiztastic.controller.GameController;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -43,10 +43,10 @@ public class DisplayQuestions {
             try{
 
                 //We make a controller object so we can initialize the init() method
-                Controller controller = new Controller();
+                GameController gameController = new GameController();
 
                 //We initialize the init() method
-                controller.init(inputStream);
+                gameController.init(inputStream);
 
                 //We catch the different exceptions that come
             } catch (IOException IOException) {
