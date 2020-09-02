@@ -2,18 +2,19 @@ package quiztastic.controller;
 
 import quiztastic.core.Board;
 import quiztastic.core.Question;
+import quiztastic.core.Question_board;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-public class boardController {
+public class BoardController {
 
-    Board board;
+    Board board = new Board();
 
     public ArrayList<Integer> generateRandomNumbers(ArrayList<Question> list){
 
         //Create a Integer list
-        ArrayList<Integer> randomNumberList = new ArrayList<Integer>();
+        ArrayList<Integer> randomNumberList = new ArrayList<>();
 
         // create instance of Random class
         Random rand = new Random();
@@ -96,26 +97,28 @@ public class boardController {
     }
 
     //public void createBoard(ArrayList<Question> list, int cat1, int cat2, int cat3, int cat4, int cat5, int cat6){
-    public void createBoard(ArrayList<Question> list, ArrayList<Integer> randomNumberList){
+    public void createBoard(ArrayList<Question_board> list){
 
+        //We print the header of the board (The list has 30 spots. Every 5 spot is a now line of questions)
         System.out.println(board.getHeader());
         System.out.format(board.getCategoryLeftAlignFormat(),
-                list.get(randomNumberList.get(0)).getCategory().getCategoryName(),
-                list.get(randomNumberList.get(1)).getCategory().getCategoryName(),
-                list.get(randomNumberList.get(2)).getCategory().getCategoryName(),
-                list.get(randomNumberList.get(3)).getCategory().getCategoryName(),
-                list.get(randomNumberList.get(4)).getCategory().getCategoryName(),
-                list.get(randomNumberList.get(5)).getCategory().getCategoryName());
+                list.get(0).getCategory().getCategoryName(),
+                list.get(5).getCategory().getCategoryName(),
+                list.get(10).getCategory().getCategoryName(),
+                list.get(15).getCategory().getCategoryName(),
+                list.get(20).getCategory().getCategoryName(),
+                list.get(25).getCategory().getCategoryName());
 
-        for( int i = 0 ; i < randomNumberList.size() - 1 ; i++ ){
+        //We print 5 rows of point on the board
+        for( int i = 0 ; i < 5 ; i++ ){
             System.out.println(board.getSeparator());
             System.out.format(board.getScoreLeftAlignFormatRow(),
-                    list.get(randomNumberList.get(0) + i).getScore(),
-                    list.get(randomNumberList.get(1) + i).getScore(),
-                    list.get(randomNumberList.get(2) + i).getScore(),
-                    list.get(randomNumberList.get(3) + i).getScore(),
-                    list.get(randomNumberList.get(4) + i).getScore(),
-                    list.get(randomNumberList.get(5) + i).getScore());
+                    list.get(0 + i).getAnswered() == null ? list.get(0 + i).getScore() : list.get(0 + i).getAnswered(),
+                    list.get(5 + i).getAnswered() == null ? list.get(5 + i).getScore() : list.get(5 + i).getAnswered(),
+                    list.get(10 + i).getAnswered() == null ? list.get(10 + i).getScore() : list.get(10 + i).getAnswered(),
+                    list.get(15 + i).getAnswered() == null ? list.get(15 + i).getScore() : list.get(15 + i).getAnswered(),
+                    list.get(20 + i).getAnswered() == null ? list.get(20 + i).getScore() : list.get(20 + i).getAnswered(),
+                    list.get(25 + i).getAnswered() == null ? list.get(25 + i).getScore() : list.get(25 + i).getAnswered());
         }
         System.out.println(board.getFooter());
 

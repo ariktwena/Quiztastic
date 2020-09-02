@@ -7,11 +7,11 @@ package quiztastic.core;
  */
 public class Question {
 
-    private final int id;
-    private final int score;
-    private final Category category;
-    private final String question;
-    private final String answer;
+    protected final int id;
+    protected final int score;
+    protected final Category category;
+    protected final String question;
+    protected final String answer;
 
     public Question(int id, int score, Category category, String question, String answer) {
         this.id = id;

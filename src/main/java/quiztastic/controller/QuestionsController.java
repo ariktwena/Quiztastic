@@ -3,6 +3,7 @@ package quiztastic.controller;
 
 import quiztastic.core.Category;
 import quiztastic.core.Question;
+import quiztastic.core.Question_board;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,133 +12,50 @@ import java.util.Map;
 
 public class QuestionsController {
 
-//    //Remove questions where score is 0
-//    public ArrayList<Question> removeZeroScore(ArrayList<Question> list){
-//
-//        for( int i = 0 ; i < list.size() ; i++ ){
-//
-//            if (list.get(i).getScore() == 0){
-//
-//                list.remove(i);
-//
-//            }
-//
+    //Remove questions where score is 0
+    public List<Question> removeWrongScores(List<Question> list){
+
+        for( int i = 0 ; i < list.size() ; i++ ){
+
+            //Check if the score equals the values
+            if (list.get(i).getScore() == 0
+                    ||
+                    list.get(i).getScore() == 1200
+                    ||
+                    list.get(i).getScore() == 1600
+                    ||
+                    list.get(i).getScore() == 2000
+                    ||
+                    list.get(i).getScore() == 3400
+                    ||
+                    list.get(i).getScore() == 3800
+                    ||
+                    list.get(i).getScore() == 4000
+                    ||
+                    list.get(i).getScore() == 5000
+                    ||
+                    list.get(i).getScore() == 5200
+                    ||
+                    list.get(i).getScore() == 6000){
+
+                //Remove the index fom the list
+                list.remove(i);
+
+                //Go back one index, because the list is shorter because of the removal
+                i--;
+
+            }
+
+        }
+
+//        for(int i = 0 ; i < list.size() ; i++ ){
+//            System.out.println(list.get(i).toString());
 //        }
-//
-//        return list;
-//    }
-//
-//    //Remove questions where score is 1200
-//    public ArrayList<Question> remove1200Score(ArrayList<Question> list){
-//
-//        for( int i = 0 ; i < list.size() ; i++ ){
-//
-//            if (list.get(i).getScore() == 1200){
-//
-//                list.remove(i);
-//
-//            }
-//
-//        }
-//
-//        return list;
-//    }
-//
-//    //Remove questions where score is 1600
-//    public ArrayList<Question> remove1600Score(ArrayList<Question> list){
-//
-//        for( int i = 0 ; i < list.size() ; i++ ){
-//
-//            if (list.get(i).getScore() == 1600){
-//
-//                list.remove(i);
-//
-//            }
-//
-//        }
-//
-//        return list;
-//    }
-//
-//    //Remove questions where score is 2000
-//    public ArrayList<Question> remove2000Score(ArrayList<Question> list){
-//
-//        for( int i = 0 ; i < list.size() ; i++ ){
-//
-//            if (list.get(i).getScore() == 2000){
-//
-//                list.remove(i);
-//
-//            }
-//
-//        }
-//
-//        return list;
-//    }
-//
-//    //Remove questions where score is 3400
-//    public ArrayList<Question> remove3400Score(ArrayList<Question> list){
-//
-//        for( int i = 0 ; i < list.size() ; i++ ){
-//
-//            if (list.get(i).getScore() == 3400){
-//
-//                list.remove(i);
-//
-//            }
-//
-//        }
-//
-//        return list;
-//    }
-//
-//    //Remove questions where score is 4000
-//    public ArrayList<Question> remove4000Score(ArrayList<Question> list){
-//
-//        for( int i = 0 ; i < list.size() ; i++ ){
-//
-//            if (list.get(i).getScore() == 4000){
-//
-//                list.remove(i);
-//
-//            }
-//
-//        }
-//
-//        return list;
-//    }
-//
-//    //Remove questions where score is 5000
-//    public ArrayList<Question> remove5000Score(ArrayList<Question> list){
-//
-//        for( int i = 0 ; i < list.size() ; i++ ){
-//
-//            if (list.get(i).getScore() == 5000){
-//
-//                list.remove(i);
-//
-//            }
-//
-//        }
-//
-//        return list;
-//    }
-//
-//    //Remove questions where score is 6000
-//    public ArrayList<Question> remove6000Score(ArrayList<Question> list){
-//
-//        for( int i = 0 ; i < list.size() ; i++ ){
-//
-//            if (list.get(i).getScore() == 6000){
-//
-//                list.remove(i);
-//
-//            }
-//
-//        }
-//
-//        return list;
-//    }
+
+        //Return the list
+        return list;
+    }
+
 
     //Remove categories that don't have 5 questions
     public ArrayList<Question> matchQuestionsPerCategory(List<Question> list) {
@@ -173,7 +91,6 @@ public class QuestionsController {
 //            System.out.println("Index: " + i + " " + alteredList.get(i).toString());
 //        }
 
-
         return alteredList;
 
     }
@@ -185,21 +102,20 @@ public class QuestionsController {
         //We make a hashMap to store the category as key and questions array as value
         HashMap<Category, ArrayList<Question>> questionsByCategory = new HashMap<>();
 
-        //We make a altered list to put the values Questions in
-        ArrayList<Question> alteredList = new ArrayList<Question>();
-
         for( int i = 0 ; i < list.size() - 5 ; i+=5 ) {
 
+            //We make a altered list to put the values Questions in
+            ArrayList<Question> alteredList = new ArrayList<Question>();
 
-                //We add the category entries to a new array
-                alteredList.add(list.get(i));
-                alteredList.add(list.get(i + 1));
-                alteredList.add(list.get(i + 2));
-                alteredList.add(list.get(i + 3));
-                alteredList.add(list.get(i + 4));
+            //We add the category entries to a new array
+            alteredList.add(list.get(i));
+            alteredList.add(list.get(i + 1));
+            alteredList.add(list.get(i + 2));
+            alteredList.add(list.get(i + 3));
+            alteredList.add(list.get(i + 4));
 
-                //We add to the category to the HashMap
-                questionsByCategory.put(list.get(i).getCategory(), alteredList = new ArrayList<Question>());
+            //We add to the category to the HashMap
+            questionsByCategory.put(list.get(i).getCategory(), alteredList);
 
         }
 
@@ -212,8 +128,8 @@ public class QuestionsController {
 //            System.out.println(category.getKey().getCategoryName());
 //            System.out.println(category.getValue().size());
 //
-//            for( int x = 0 ; x < category.getValue().size() ; x++ ) {
-//                System.out.println(category.getValue().get(x).toString());
+//            for( int i = 0 ; i < category.getValue().size() ; i++ ) {
+//                System.out.println(category.getValue().get(i).toString());
 //            }
 //
 //        }
@@ -244,6 +160,41 @@ public class QuestionsController {
         return alteredList;
 
     }
+
+
+    public ArrayList<Question_board> extractBoardQuestions(ArrayList<Question> list, ArrayList<Integer> randomNumbers){
+
+        //We make a altered list to put the values Questions in
+        ArrayList<Question_board> alteredList = new ArrayList<>();
+
+        //We go to the random number that is the index
+        for(int i = 0 ; i < randomNumbers.size() ; i++){
+
+            //We extract the index and the next 4 questions and make a Question_board from them
+            for(int j = 0 ; j < 5 ; j++){
+                alteredList.add(new Question_board(
+                        list.get(randomNumbers.get(i) + j).getId(),
+                        list.get(randomNumbers.get(i) + j).getScore(),
+                        list.get(randomNumbers.get(i) + j).getCategory(),
+                        list.get(randomNumbers.get(i) + j).getQuestion(),
+                        list.get(randomNumbers.get(i) + j).getAnswer()));
+            }
+
+        }
+
+//        for( int i = 0 ; i < alteredList.size() ; i++ ){
+//            if(alteredList.get(i).getAnswered() == null){
+//
+//                System.out.println(alteredList.get(i).toString());
+//
+//            }
+//        }
+
+        return alteredList;
+
+    }
+
+
 
     //We make an array list of the easy questions
     public ArrayList<Question> matchEasyCategories(List<Question> list) {
@@ -316,103 +267,6 @@ public class QuestionsController {
         return alteredList;
 
     }
-
-//    public ArrayList<Question> removeWrongScore(ArrayList<Question> list){
-//
-//        //We make a altered list to put the values in
-//        ArrayList<Question> alteredList = new ArrayList<Question>();
-//
-//        for( int i = 0 ; i < list.size() ; i++ ){
-//
-//            //Remove questions with score (0, 1200, 1600, 2000, 3400, 4000, 5000, 6000)
-//            if (list.get(i).getScore() != 0
-//                    ||
-//                    list.get(i).getScore() != 1200
-//                    ||
-//                    list.get(i).getScore() != 1600
-//                    ||
-//                    list.get(i).getScore() != 2000
-//                    ||
-//                    list.get(i).getScore() != 3400
-//                    ||
-//                    list.get(i).getScore() != 4000
-//                    ||
-//                    list.get(i).getScore() != 5000
-//                    ||
-//                    list.get(i).getScore() != 6000){
-//
-//                alteredList.add(list.get(i));
-//
-//            }
-//
-//        }
-//
-//        for( int i = 0 ; i < alteredList.size() ; i++ ){
-//            System.out.println("Index: " + i + " " + alteredList.get(i).toString());
-//        }
-//
-//        return alteredList;
-//    }
-
-
-//    public boolean firstQuestionMatchSecond(List<Question> list, int index){
-//
-//        if(!(list.get(index).getCategory().contentEquals(list.get(index + 1).getCategory()))){
-//            return false;
-//        }
-//
-//        return true;
-//    }
-//
-//    public boolean firstQuestionMatchThird(List<Question> list, int index){
-//
-//
-//        if(!(list.get(index).getCategory().contentEquals(list.get(index + 2).getCategory()))){
-//            return false;
-//        }
-//
-//
-//        return true;
-//    }
-//
-//    public boolean firstQuestionMatchFouth(List<Question> list, int index){
-//
-//
-//        if(!(list.get(index).getCategory().contentEquals(list.get(index + 3).getCategory()))){
-//            return false;
-//        }
-//
-//
-//        return true;
-//    }
-//
-//    public boolean firstQuestionMatchFifth(List<Question> list, int index){
-//
-//
-//        if(!(list.get(index).getCategory().contentEquals(list.get(index + 4).getCategory()))){
-//            return false;
-//        }
-//
-//
-//        return true;
-//    }
-//
-//    public List<Question> matchFiveQuestionsPerCategory(List<Question> list) {
-//
-//
-//        for( int i = 0 ; i < list.size() - 4 ; i++ ) {
-//
-//            if(!(firstQuestionMatchSecond(list, i) && firstQuestionMatchThird(list, i) && firstQuestionMatchFouth(list, i) && firstQuestionMatchFifth(list, i))){
-//                list.remove(i);
-//            } else {
-//                i +=4;
-//            }
-//
-//        }
-//
-//        return list;
-//    }
-
 
 
 }
