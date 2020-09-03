@@ -10,12 +10,12 @@ public class Board {
     private String separator = "+--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+";
     private String scoreLeftAlignFormatRow = "| %-30s | %-30s | %-30s | %-30s | %-30s | %-30s |%n";
     private String footer = "+--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+--------------------------------+";
-    private int status;
+//    private int status;
 
-    public Board() {
-
-        this.status = 0;
-    }
+//    public Board() {
+//
+//        this.status = 0;
+//    }
 
     public String getHeader() {
         return header;
@@ -37,11 +37,11 @@ public class Board {
         return footer;
     }
 
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
+//    public int getStatus() {
+//        return status;
+//    }
+//
+//    public void setStatus(int status) {
+//        this.status = status;
+//    }
 }

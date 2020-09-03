@@ -26,11 +26,12 @@ public class TUI {
         System.out.println("Welcome to the Quiz show " + name + "!!");
         System.out.println("");
         System.out.println("Here are the roles of the game: ");
-        System.out.println("You start by choosing a category A, B C etc. Then you choose a question for points.");
-        System.out.println("If you answer correctly you get the points.");
-        System.out.println("Write [Play] to start the game :)");
+        System.out.println("You start by choosing a category A, B, C etc. Then you choose a question for points.");
+        System.out.println("If you answer correctly, you get the points.");
         System.out.println("");
-        System.out.println("If you ever need help, then just write [help] in the command line. Have a Happy Quizzy");
+        System.out.println("If you ever need help, then just write [help].");
+        System.out.println("");
+        System.out.println("Write [Play] to start the game. Have a Happy Quizzy :)");
         return name;
     }
 
@@ -47,11 +48,12 @@ public class TUI {
     //Get help
     public void getHelp(){
         System.out.println("");
-        System.out.println("Here are the help commands");
+        System.out.println("Here are the help commands:");
         System.out.println("[Help]" + "\t" + "Get help and options");
         System.out.println("[Play]" + "\t" + "Start the game");
         System.out.println("[Score]" + "\t" + "See your current score");
-        System.out.println("[exit]" + "\t" + "Exit the game");
+        System.out.println("[Board]" + "\t" + "See the question status");
+        System.out.println("[Exit]" + "\t" + "Exit the game");
     }
 
     //Exit the game
@@ -61,10 +63,16 @@ public class TUI {
         System.exit(0);
     }
 
-    //We typing unknown operation
-    public void unknownOperation(String name){
+    //Get player score
+    public void getScore(Player player){
         System.out.println("");
-        System.out.println(name + " you have typed an unknown operation. If you need help, then just type [Help].");
+        System.out.println(player.getName() + " you have " + player.getScore() + " points.");
+    }
+
+    //Get player score
+    public void getBoardStatus(int boardStatus){
+        System.out.println("");
+        System.out.println("You have answered " + boardStatus + " questions. You still have " + (60-boardStatus) + " to go :)");
     }
 
 
@@ -85,7 +93,11 @@ public class TUI {
     //Get help
     public void getHelpCategory(){
         System.out.println("");
-        System.out.println("This is the help...");
+        System.out.println("Here are the help commands:");
+        System.out.println("[Help]" + "\t" + "Get help and options");
+        System.out.println("[Score]" + "\t" + "See your current score");
+        System.out.println("[Board]" + "\t" + "See the question status");
+        System.out.println("[Exit]" + "\t" + "Exit the game");
     }
 
     //Show chosen category
@@ -128,7 +140,7 @@ public class TUI {
 
     //Get the question
     public boolean getTheQuestion(ArrayList<Question_board> list, int index_start, int question_index){
-        if(list.get(index_start + question_index).getAnswered() == null){
+        if(list.get(index_start + question_index).getAnswered() != null){
             System.out.print("The question has already been played");
             return false;
         } else {
@@ -150,7 +162,7 @@ public class TUI {
         if(list.get(index_start + question_index).getAnswer().equalsIgnoreCase(answer)){
 
             //Message to the player
-            System.out.print("Correct " + player.getName() + "!!! You have earned " + list.get(index_start + question_index).getScore() + " points :)");
+            System.out.print("Correct " + player.getName() + "!!! You have earned " + list.get(index_start + question_index).getScore() + " points :)\n");
 
             //We add the score to the player
             player.setScore(player.getScore() + list.get(index_start + question_index).getScore());
@@ -161,7 +173,7 @@ public class TUI {
         } else {
 
             //Message to the player
-            System.out.print("Incorrect " + player.getName() + "! The right answer is: " + list.get(index_start + question_index).getAnswer());
+            System.out.print("Incorrect " + player.getName() + "! The right answer is: " + list.get(index_start + question_index).getAnswer() + "\n");
 
             //We deactivet the question
             list.get(index_start + question_index).setAnswered("---");
@@ -172,9 +184,25 @@ public class TUI {
     //Get help
     public void getHelpQuestions(){
         System.out.println("");
-        System.out.println("This is the help...");
+        System.out.println("Here are the help commands:");
+        System.out.println("[Help]" + "\t" + "Get help and options");
+        System.out.println("[Score]" + "\t" + "See your current score");
+        System.out.println("[Board]" + "\t" + "See the question status");
+        System.out.println("[Back]" + "\t" + "Go back to the categories");
+        System.out.println("[Exit]" + "\t" + "Exit the game");
     }
 
 
+    /**
+     *
+     * Play Board - Hard
+     *
+     */
+
+    //Get help
+    public void getHardBoardMessage(){
+        System.out.println("");
+        System.out.println("You have reached the hard part of the game. You will now be tested on the hardest questions for maximum prizes :)");
+    }
 
 }
