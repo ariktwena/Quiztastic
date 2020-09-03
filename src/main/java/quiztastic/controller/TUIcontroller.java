@@ -1,58 +1,87 @@
 package quiztastic.controller;
 
+import quiztastic.core.Question_board;
+import quiztastic.core.TUI;
+
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TUIcontroller {
 
-    Scanner scanner = new Scanner(System.in);
+    TUI tui = new TUI();
 
-    //Get input from player
-    public String playerInput(){
-        System.out.print("> ");
-        String input = scanner.next();
-        return input;
+    BoardController boardController = new BoardController();
+
+    public void printHelp(String name, ArrayList<Question_board> easyList, ArrayList<Question_board> hardList){
+
+        while (true){
+
+            switch (tui.playerInput().toLowerCase()){
+                case "play":
+                    tui.loader();
+                    loadBoard(easyList);
+                    break;
+                case "help":
+                    tui.loader();
+                    tui.getHelp();
+                    break;
+                case "exit":
+                    tui.exitGame(name);
+                    break;
+                default:
+                    System.out.println("");
+                    System.out.println("Do you need help? Then just write [help], or [exit] to end the game.");
+            }
+
+        }
+
     }
 
-    //Get player name
-    public String getPlayerName(){
-        System.out.println("Enter your name: ");
-        String name = scanner.next();
-        System.out.println("");
-        System.out.println("Welcome to the Quiz show " + name + "!!");
-        System.out.println("");
-        System.out.println("Here are the roles of the game...");
-        System.out.println("");
-        System.out.println("If you need evr need help, then just write [help] in the command line. Have a Happy Quizzy");
-        return name;
+    public void loadBoard(ArrayList<Question_board> list){
+        boardController.createBoard(list);
     }
 
-    //Loading text
-    public void loader(){
-        try{
-            System.out.println("Loading.....");
-            Thread.sleep(1500);
-        } catch (InterruptedException i){
-            throw new UnsupportedOperationException("You got an InterruptedException: " + i.getMessage());
+    public void playBoard(String name, ArrayList<Question_board> list){
+
+        while (boardController.board.getStatus() <= 30){
+
+            switch (tui.playerCategoryInput().toLowerCase()){
+                case "a":
+
+                    break;
+                case "b":
+
+                    break;
+                case "c":
+
+                    break;
+                case "d":
+
+                    break;
+                case "e":
+
+                    break;
+                case "f":
+
+                    break;
+                case "help":
+                    tui.loader();
+                    tui.getHelp();
+                    break;
+                case "exit":
+                    tui.exitGame(name);
+                    break;
+                default:
+                    System.out.println("");
+                    System.out.println("You have to choose a category: A, B, C, D, E or F. You can ask for []");
+                    System.out.println("You can also ask for [help] or [exit] the game...");
+            }
+
         }
     }
 
-    //Get help
-    public void getHelp(){
-        System.out.println("Enter your name: ");
-        String name = scanner.next();
-        System.out.println("");
-        System.out.println("Welcome to the Quiz show " + name);
-    }
 
-    //Exit the game
-    public void exitGame(String name){
-        System.out.println("I have never met a successful person that was a quitter. Successful people never, ever, give up! " + name);
-        System.exit(0);
-    }
 
-    //We typing unknown operation
-    public void unknownOperation(String name){
-        System.out.println(name + " you have typed an unknown operation. If you need help, then just type [Help].");
-    }
+
 
 }

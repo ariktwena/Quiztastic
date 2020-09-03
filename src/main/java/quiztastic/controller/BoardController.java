@@ -102,12 +102,12 @@ public class BoardController {
         //We print the header of the board (The list has 30 spots. Every 5 spot is a now line of questions)
         System.out.println(board.getHeader());
         System.out.format(board.getCategoryLeftAlignFormat(),
-                list.get(0).getCategory().getCategoryName(),
-                list.get(5).getCategory().getCategoryName(),
-                list.get(10).getCategory().getCategoryName(),
-                list.get(15).getCategory().getCategoryName(),
-                list.get(20).getCategory().getCategoryName(),
-                list.get(25).getCategory().getCategoryName());
+                "A: " + list.get(0).getCategory().getCategoryName(),
+                "B: " +list.get(5).getCategory().getCategoryName(),
+                "C: " +list.get(10).getCategory().getCategoryName(),
+                "D: " +list.get(15).getCategory().getCategoryName(),
+                "E: " +list.get(20).getCategory().getCategoryName(),
+                "F: " +list.get(25).getCategory().getCategoryName());
 
         //We print 5 rows of point on the board
         for( int i = 0 ; i < 5 ; i++ ){

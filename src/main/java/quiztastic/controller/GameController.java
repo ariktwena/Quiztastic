@@ -2,10 +2,7 @@ package quiztastic.controller;
 
 import quiztastic.app.ListQuestionRepository;
 import quiztastic.app.QuestionReader;
-import quiztastic.core.Board;
-import quiztastic.core.Category;
-import quiztastic.core.Question;
-import quiztastic.core.Question_board;
+import quiztastic.core.*;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,6 +26,11 @@ public class GameController {
 
     //New board controller class
     BoardController boardController = new BoardController();
+
+    //New TUI controller class
+    TUIcontroller tuiController = new TUIcontroller();
+
+    Player player;
 
 
     public void init(InputStream inputStream) throws IOException, ParseException {
@@ -101,7 +103,8 @@ public class GameController {
         easyBoardQuestions = questionsController.extractBoardQuestions(easyQuestionsModList, easyCategoryRandomNumbers);
 
         //Create board with easy questions
-        boardController.createBoard(easyBoardQuestions);
+        //boardController.createBoard(easyBoardQuestions);
+
 
         //
 //        for( int i = 0 ; i < easyQuestionsModList.size() ; i++ ){
@@ -153,7 +156,8 @@ public class GameController {
         hardBoardQuestions = questionsController.extractBoardQuestions(hardQuestionsModList, hardCategoryRandomNumbers);
 
         //Create board with hard questions
-        boardController.createBoard(hardBoardQuestions);
+        //boardController.createBoard(hardBoardQuestions);
+
 
 
 
@@ -176,6 +180,11 @@ public class GameController {
         System.out.println("Hard questions: " + hardQuestionsModList.size() + " categories: " + hardCategoryList.size());
 
 
+
+
+        player = new Player(tuiController.tui.getPlayerName());
+
+        tuiController.printHelp(player.getName(), easyBoardQuestions, hardBoardQuestions);
 
     }
 
