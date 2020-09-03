@@ -1,5 +1,7 @@
 package quiztastic.core;
 
+import java.net.PortUnreachableException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TUI {
@@ -23,11 +25,12 @@ public class TUI {
         System.out.println("");
         System.out.println("Welcome to the Quiz show " + name + "!!");
         System.out.println("");
-        System.out.println("Here are the roles of the game...");
+        System.out.println("Here are the roles of the game: ");
+        System.out.println("You start by choosing a category A, B C etc. Then you choose a question for points.");
+        System.out.println("If you answer correctly you get the points.");
+        System.out.println("Write [Play] to start the game :)");
         System.out.println("");
         System.out.println("If you ever need help, then just write [help] in the command line. Have a Happy Quizzy");
-        System.out.println("");
-        System.out.println("If you want to exit the game, just write [exit].");
         return name;
     }
 
@@ -44,7 +47,11 @@ public class TUI {
     //Get help
     public void getHelp(){
         System.out.println("");
-        System.out.println("This is the help...");
+        System.out.println("Here are the help commands");
+        System.out.println("[Help]" + "\t" + "Get help and options");
+        System.out.println("[Play]" + "\t" + "Start the game");
+        System.out.println("[Score]" + "\t" + "See your current score");
+        System.out.println("[exit]" + "\t" + "Exit the game");
     }
 
     //Exit the game
@@ -63,31 +70,111 @@ public class TUI {
 
     /**
      *
-     * Play Board
+     * Play Board - Category
      *
      */
 
     //Choose category
     public String playerCategoryInput(){
-        loader();
         System.out.println("");
-        System.out.print("Choose Category > ");
+        System.out.print("Choose a category > ");
         String input = scanner.nextLine();
-
-        while(input.equalsIgnoreCase("a")
-                || input.equalsIgnoreCase("b")
-                || input.equalsIgnoreCase("c")
-                || input.equalsIgnoreCase("d")
-                || input.equalsIgnoreCase("e")
-                || input.equalsIgnoreCase("f")
-                || input.equalsIgnoreCase("help")
-                || input.equalsIgnoreCase("exit")) {
-            System.out.println("");
-            System.out.print("Wrong input....");
-            System.out.print("Choose a Category > ");
-            input = scanner.nextLine();
-        }
-
         return input;
     }
+
+    //Get help
+    public void getHelpCategory(){
+        System.out.println("");
+        System.out.println("This is the help...");
+    }
+
+    //Show chosen category
+    public void getCategoryTitle(int index_start, ArrayList<Question_board> list){
+        System.out.println("");
+        System.out.println("You have chosen the Category '" + list.get(index_start).getCategory().getCategoryName() + "', here are the the available questions and possible score prize!");
+    }
+
+
+    /**
+     *
+     * Play Board - Questions
+     *
+     */
+
+    //Show available questions
+    public void availableQuestionsInCategory(int index_start, int index_end, ArrayList<Question_board> list){
+
+        String[] choiseSpots = {"A", "B", "C", "D", "E"};
+        int choiseCount = 0;
+
+        for( int i = index_start ; i < index_end ; i++ ){
+            if(list.get(i).getAnswered() == null){
+                System.out.println(choiseSpots[choiseCount] + ": " + list.get(i).getScore());
+            } else {
+                System.out.println(choiseSpots[choiseCount] + ": Question has already been answered.");
+            }
+            choiseCount ++;
+        }
+
+    }
+
+    //Choose question choice
+    public String playerQuestionInputChoice(){
+        System.out.println("");
+        System.out.print("Choose a question > ");
+        String input = scanner.nextLine();
+        return input;
+    }
+
+    //Get the question
+    public boolean getTheQuestion(ArrayList<Question_board> list, int index_start, int question_index){
+        if(list.get(index_start + question_index).getAnswered() == null){
+            System.out.print("The question has already been played");
+            return false;
+        } else {
+            System.out.print(list.get(index_start + question_index).getQuestion());
+            return true;
+        }
+    }
+
+    //Choose question answer
+    public String playerQuestionInputAnswer(){
+        System.out.println("");
+        System.out.print("What is you answer? > ");
+        String input = scanner.nextLine();
+        return input;
+    }
+
+    //Validate answer
+    public void validateAnswer(ArrayList<Question_board> list, int index_start, int question_index, String answer, Player player){
+        if(list.get(index_start + question_index).getAnswer().equalsIgnoreCase(answer)){
+
+            //Message to the player
+            System.out.print("Correct " + player.getName() + "!!! You have earned " + list.get(index_start + question_index).getScore() + " points :)");
+
+            //We add the score to the player
+            player.setScore(player.getScore() + list.get(index_start + question_index).getScore());
+
+            //We deactivet the question
+            list.get(index_start + question_index).setAnswered("---");
+
+        } else {
+
+            //Message to the player
+            System.out.print("Incorrect " + player.getName() + "! The right answer is: " + list.get(index_start + question_index).getAnswer());
+
+            //We deactivet the question
+            list.get(index_start + question_index).setAnswered("---");
+
+        }
+    }
+
+    //Get help
+    public void getHelpQuestions(){
+        System.out.println("");
+        System.out.println("This is the help...");
+    }
+
+
+
 }

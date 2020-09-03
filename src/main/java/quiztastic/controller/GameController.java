@@ -184,7 +184,8 @@ public class GameController {
 
         player = new Player(tuiController.tui.getPlayerName());
 
-        tuiController.printHelp(player.getName(), easyBoardQuestions, hardBoardQuestions);
+        tuiController.startGame(player, easyBoardQuestions);
+        //tuiController.printHelp(player, hardBoardQuestions);
 
     }
 

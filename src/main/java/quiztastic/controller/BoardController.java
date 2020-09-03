@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class BoardController {
 
-    Board board = new Board();
+    Board board;
 
     public ArrayList<Integer> generateRandomNumbers(ArrayList<Question> list){
 
@@ -98,6 +98,9 @@ public class BoardController {
 
     //public void createBoard(ArrayList<Question> list, int cat1, int cat2, int cat3, int cat4, int cat5, int cat6){
     public void createBoard(ArrayList<Question_board> list){
+
+        //We create a new board object
+        board = new Board();
 
         //We print the header of the board (The list has 30 spots. Every 5 spot is a now line of questions)
         System.out.println(board.getHeader());
