@@ -13,6 +13,7 @@ public class Board {
     private int status;
 
     public Board() {
+
         this.status = 0;
     }
 
