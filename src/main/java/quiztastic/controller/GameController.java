@@ -35,6 +35,13 @@ public class GameController {
 
     public void init(InputStream inputStream) throws IOException, ParseException {
 
+        /**
+         *
+         *
+         * Initialize the data
+         *
+         */
+
         //Initialize Question reader with the path to the questions file
         QuestionReader questionReader = new QuestionReader(new InputStreamReader(inputStream));
 
@@ -55,7 +62,8 @@ public class GameController {
         //Get the original questions list and assign it to the questionsModList variable
         questionsModList = listQuestionRepository.getQuestionsList();
 
-        System.out.println(questionsModList.size());
+        //Total number of questions
+        //System.out.println(questionsModList.size());
 
         //Validate list: Remove wrong scores (0, 5000, 2000, 1200, 1600 etc...)
         questionsModList = questionsController.removeWrongScores(questionsModList);
@@ -65,6 +73,16 @@ public class GameController {
 
         //Validate list: Match 5 questions per category
         ListOrderdByCategory = questionsController.matchQuestionsPerCategory(questionsModList);
+
+        /**
+         *
+         *
+         * Play the game
+         *
+         */
+
+        //Message before the easy board
+        player = new Player(tuiController.tui.getPlayerName());
 
         /**
          *
@@ -105,17 +123,13 @@ public class GameController {
         //Create board with easy questions
         //boardController.createBoard(easyBoardQuestions);
 
-
         //
 //        for( int i = 0 ; i < easyQuestionsModList.size() ; i++ ){
 //            System.out.println("Index: " + i + " " + easyQuestionsModList.get(i).toString());
 //        }
 
-
-
-
-
-
+        //Start the easy game
+        tuiController.startGame(player, easyBoardQuestions);
 
 
         /**
@@ -124,6 +138,8 @@ public class GameController {
          *
          */
 
+        //Message before the hard board
+        tuiController.tui.getHardBoardMessage();
 
         //Question array variable, so we can modify det original
         ArrayList<Question> hardQuestionsModList;
@@ -158,14 +174,12 @@ public class GameController {
         //Create board with hard questions
         //boardController.createBoard(hardBoardQuestions);
 
-
-
-
-
-
 //        for( int i = 0 ; i < hardQuestionsModList.size() ; i++ ){
 //            System.out.println("Index: " + i + " " + hardQuestionsModList.get(i).toString());
 //        }
+
+        //Start the hard game
+        tuiController.startGame(player, hardBoardQuestions);
 
 
         /**
@@ -175,20 +189,10 @@ public class GameController {
          *
          */
 
-        System.out.println("All questions: " + (easyQuestionsModList.size() + hardQuestionsModList.size()));
-        System.out.println("Easy questions: " + easyQuestionsModList.size() + " categories: " + easyCategoryList.size());
-        System.out.println("Hard questions: " + hardQuestionsModList.size() + " categories: " + hardCategoryList.size());
+//        System.out.println("All questions: " + (easyQuestionsModList.size() + hardQuestionsModList.size()));
+//        System.out.println("Easy questions: " + easyQuestionsModList.size() + " categories: " + easyCategoryList.size());
+//        System.out.println("Hard questions: " + hardQuestionsModList.size() + " categories: " + hardCategoryList.size());
 
-
-
-
-        player = new Player(tuiController.tui.getPlayerName());
-
-        tuiController.startGame(player, easyBoardQuestions);
-
-        tuiController.tui.getHardBoardMessage();
-
-        tuiController.startGame(player, hardBoardQuestions);
 
 
     }
