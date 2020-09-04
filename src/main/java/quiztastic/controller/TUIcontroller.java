@@ -17,7 +17,7 @@ public class TUIcontroller {
 
         int boardStatus = 0;
 
-        while (true){
+        while (boardStatus < 30){
 
             switch (tui.playerInput().toLowerCase()){
                 case "play":
@@ -38,8 +38,7 @@ public class TUIcontroller {
                     tui.exitGame(player.getName());
                     break;
                 default:
-                    System.out.println("");
-                    System.out.println("Do you need help? Then just write [help], or [exit] to end the game.");
+                    tui.gameDefaultMessage();
             }
 
         }
@@ -115,10 +114,7 @@ public class TUIcontroller {
                     tui.exitGame(player.getName());
                     break;
                 default:
-                    System.out.println("");
-                    System.out.print("Wrong input....");
-                    System.out.println("You have to choose a category: A, B, C, D, E or F.");
-                    System.out.println("You can also ask for [help] or [exit] the game...");
+                    tui.categoryDefaultMessage();
             }
 
         }
@@ -137,7 +133,7 @@ public class TUIcontroller {
                     if(tui.getTheQuestion(list, index_start, question_index)){
                         String answer = tui.playerQuestionInputAnswer();
                         tui.validateAnswer(list, index_start, question_index, answer, player);
-                        boardStatus++;
+                        boardStatus += 1;
                     };
                     //Restart categories
                     tui.loader();
@@ -149,7 +145,7 @@ public class TUIcontroller {
                     if(tui.getTheQuestion(list, index_start, question_index)){
                         String answer = tui.playerQuestionInputAnswer();
                         tui.validateAnswer(list, index_start, question_index, answer, player);
-                        boardStatus++;
+                        boardStatus += 1;
                     };
                     //Restart categories
                     tui.loader();
@@ -161,7 +157,7 @@ public class TUIcontroller {
                     if(tui.getTheQuestion(list, index_start, question_index)){
                         String answer = tui.playerQuestionInputAnswer();
                         tui.validateAnswer(list, index_start, question_index, answer, player);
-                        boardStatus++;
+                        boardStatus += 1;
                     };
                     //Restart categories
                     tui.loader();
@@ -173,7 +169,7 @@ public class TUIcontroller {
                     if(tui.getTheQuestion(list, index_start, question_index)){
                         String answer = tui.playerQuestionInputAnswer();
                         tui.validateAnswer(list, index_start, question_index, answer, player);
-                        boardStatus++;
+                        boardStatus += 1;
                     };
                     //Restart categories
                     tui.loader();
@@ -185,7 +181,7 @@ public class TUIcontroller {
                     if(tui.getTheQuestion(list, index_start, question_index)){
                         String answer = tui.playerQuestionInputAnswer();
                         tui.validateAnswer(list, index_start, question_index, answer, player);
-                        boardStatus++;
+                        boardStatus += 1;
                     };
                     //Restart categories
                     tui.loader();
@@ -209,10 +205,7 @@ public class TUIcontroller {
                     tui.exitGame(player.getName());
                     break;
                 default:
-                    System.out.println("");
-                    System.out.print("Wrong input....");
-                    System.out.println("You have to choose a question: A, B, C, D or E.");
-                    System.out.println("You can also ask for [help] or [exit] the game...");
+                    tui.questionsDefaultMessage();
             }
 
         }

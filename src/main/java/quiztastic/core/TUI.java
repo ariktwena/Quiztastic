@@ -72,7 +72,13 @@ public class TUI {
     //Get player score
     public void getBoardStatus(int boardStatus){
         System.out.println("");
-        System.out.println("You have answered " + boardStatus + " questions. You still have " + (60-boardStatus) + " to go :)");
+        System.out.println("You have answered " + boardStatus + " questions. You still have " + (30-boardStatus) + " to go :)");
+    }
+
+    //Game default message
+    public void gameDefaultMessage(){
+        System.out.println("");
+        System.out.println("Do you need help? Then just write [help], or [exit] to end the game.");
     }
 
 
@@ -98,6 +104,14 @@ public class TUI {
         System.out.println("[Score]" + "\t" + "See your current score");
         System.out.println("[Board]" + "\t" + "See the question status");
         System.out.println("[Exit]" + "\t" + "Exit the game");
+    }
+
+    //Category default message
+    public void categoryDefaultMessage(){
+        System.out.println("");
+        System.out.print("Wrong input....");
+        System.out.println("You have to choose a category: A, B, C, D, E or F.");
+        System.out.println("You can also ask for [help] or [exit] the game...");
     }
 
     //Show chosen category
@@ -141,7 +155,7 @@ public class TUI {
     //Get the question
     public boolean getTheQuestion(ArrayList<Question_board> list, int index_start, int question_index){
         if(list.get(index_start + question_index).getAnswered() != null){
-            System.out.print("The question has already been played");
+            System.out.print("The question has already been played\n");
             return false;
         } else {
             System.out.print(list.get(index_start + question_index).getQuestion());
@@ -190,6 +204,14 @@ public class TUI {
         System.out.println("[Board]" + "\t" + "See the question status");
         System.out.println("[Back]" + "\t" + "Go back to the categories");
         System.out.println("[Exit]" + "\t" + "Exit the game");
+    }
+
+    //Question default message
+    public void questionsDefaultMessage(){
+        System.out.println("");
+        System.out.print("Wrong input....");
+        System.out.println("You have to choose a question: A, B, C, D or E.");
+        System.out.println("You can also ask for [help] or [exit] the game...");
     }
 
 
