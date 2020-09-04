@@ -11,7 +11,7 @@ public class TUI {
     //Get input from player
     public String playerInput(){
         System.out.println("");
-        System.out.print("> ");
+        System.out.print("What do you want to do? > ");
         String input = scanner.nextLine();
         return input;
     }
@@ -45,6 +45,16 @@ public class TUI {
         }
     }
 
+    //Loading text
+    public void loaderLong(){
+        try{
+            System.out.println("Loading.....");
+            Thread.sleep(3000);
+        } catch (InterruptedException i){
+            throw new UnsupportedOperationException("You got an InterruptedException: " + i.getMessage());
+        }
+    }
+
     //Get help
     public void getHelp(){
         System.out.println("");
@@ -53,7 +63,22 @@ public class TUI {
         System.out.println("[Play]" + "\t" + "Start the game");
         System.out.println("[Score]" + "\t" + "See your current score");
         System.out.println("[Board]" + "\t" + "See the question status");
+        System.out.println("[Back]" + "\t" + "Go back to the categories");
         System.out.println("[Exit]" + "\t" + "Exit the game");
+        loaderLong();
+    }
+
+    //Get help in the game
+    public void getHelpGame(){
+        System.out.println("");
+        System.out.println("You have to choose a category or question by typing: A, B, C, D, E or F.");
+        System.out.println("");
+        System.out.println("Here are the help commands:");
+        System.out.println("[Help]" + "\t" + "Get help and options");
+        System.out.println("[Score]" + "\t" + "See your current score");
+        System.out.println("[Board]" + "\t" + "See the question status");
+        System.out.println("[Exit]" + "\t" + "Exit the game");
+        loaderLong();
     }
 
     //Exit the game
@@ -98,6 +123,8 @@ public class TUI {
 
     //Get help
     public void getHelpCategory(){
+        System.out.println("");
+        System.out.println("You have to choose a category or question by typing: A, B, C, D, E or F.");
         System.out.println("");
         System.out.println("Here are the help commands:");
         System.out.println("[Help]" + "\t" + "Get help and options");

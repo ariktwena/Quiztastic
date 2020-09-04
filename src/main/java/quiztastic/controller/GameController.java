@@ -30,9 +30,6 @@ public class GameController {
     //New TUI controller class
     TUIcontroller tuiController = new TUIcontroller();
 
-    Player player;
-
-
     public void init(InputStream inputStream) throws IOException, ParseException {
 
         /**
@@ -81,8 +78,7 @@ public class GameController {
          *
          */
 
-        //Message before the easy board
-        player = new Player(tuiController.tui.getPlayerName());
+        Player player = tuiController.createPlayer();
 
         /**
          *
