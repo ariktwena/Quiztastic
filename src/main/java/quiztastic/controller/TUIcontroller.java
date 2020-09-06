@@ -18,53 +18,60 @@ public class TUIcontroller {
 
     int numberOfAnswers = 0;
 
+    boolean gameStart = false;
+
+
+    //Create player
     public Player createPlayer(){
 
+        //Create player name
         player = new Player(tui.getPlayerName());
 
+        //Return player
         return player;
     }
 
+    //Creates the playing board from a list og questions
+    public void loadBoard(ArrayList<Question_board> list){
+
+        //Displays the bord to the player
+        boardController.createBoard(list);
+    }
+
+    //Starts the UI game
     public void startGame(Player player, ArrayList<Question_board> list){
 
-        switch (tui.playerInput().toLowerCase()) {
-            case "play":
-                tui.loader();
-                playBoardAndGetCategories(player, list, numberOfAnswers);
-                break;
-            case "help":
-                tui.loader();
-                tui.getHelp();
-                startGame(player, list);
-                break;
-            case "score":
-                tui.getScore(player);
-                startGame(player, list);
-                break;
-            case "board":
-                tui.getBoardStatus(numberOfAnswers);
-                startGame(player, list);
-                break;
-            case "exit":
-                tui.exitGame(player.getName());
-                break;
-            default:
-                tui.gameDefaultMessage();
-                startGame(player, list);
+        //Player start game choice
+        String playerStartChoice = tui.playerInput().toLowerCase();
+
+        //If the player write "play" the game starts
+        if(playerStartChoice.equalsIgnoreCase("play")){
+
+            //Game starts
+            playBoardAndGetCategories(player, list, numberOfAnswers);
+
+        } else {
+
+            //If the player answer doesn't match the answerIndex, we got to the switch statements
+            getSwitch(player, list, numberOfAnswers, playerStartChoice);
+
+            //Go back to category choice via "redirect
+            redirectAfterSwitch(player, list, numberOfAnswers, gameStart);
         }
 
     }
 
-    public void loadBoard(ArrayList<Question_board> list){
-        boardController.createBoard(list);
-    }
-
+    //Show the board categories and selector to the player
     public void playBoardAndGetCategories(Player player, ArrayList<Question_board> list, int numberOfAnswers){
 
         int index_start, index_end;
 
+        //Set the gameStart to true so the player can be redirected
+        gameStart = true;
+
         if (numberOfAnswers != 30) {
 
+            //Load the current status of the board
             loadBoard(list);
 
             //A list of the answers possibilities for the categories/questions
@@ -122,16 +129,16 @@ public class TUIcontroller {
                     //We restart the categories by showing the "loader"
                     tui.loaderLong();
 
-                    //We go back to the category chooser screen
-                    playBoardAndGetCategories(player, list, numberOfAnswers);
+                    //Go back to category choice via "redirect
+                    redirectAfterSwitch(player, list, numberOfAnswers, gameStart);
 
                 } else {
 
                     //If the player answer doesn't match the answerIndex, we got to the switch statements
                     getSwitch(player, list, numberOfAnswers, playerQuestionChoice);
 
-                    //Go back to category choice
-                    playBoardAndGetCategories(player, list, numberOfAnswers);
+                    //Go back to category choice via "redirect
+                    redirectAfterSwitch(player, list, numberOfAnswers, gameStart);
 
                 }
             } else {
@@ -139,8 +146,8 @@ public class TUIcontroller {
                 //If the player answer doesn't match the answerIndex, we got to the switch statements
                 getSwitch(player, list, numberOfAnswers, playerCategoryChoice);
 
-                //Go back to category choice
-                playBoardAndGetCategories(player, list, numberOfAnswers);
+                //Go back to category choice via "redirect
+                redirectAfterSwitch(player, list, numberOfAnswers, gameStart);
 
             }
         } else {
@@ -170,10 +177,55 @@ public class TUIcontroller {
                 tui.exitGame(player.getName());
                 break;
             default:
-                tui.categoryDefaultMessage();
-                playBoardAndGetCategories(player, list, numberOfAnswers);
+                tui.gameDefaultMessage();
         }
     }
+
+    public void redirectAfterSwitch(Player player, ArrayList<Question_board> list, int numberOfAnswers, boolean gameStart){
+        //Checks if the game has started though the gameStart boolean
+        if(gameStart){
+
+            //Redirects to the category selector
+            playBoardAndGetCategories(player, list, numberOfAnswers);
+
+        } else {
+
+            //Redirects to the start game screen where you can write "play"
+            startGame(player, list);
+
+        }
+    }
+
+
+//    public void startGame(Player player, ArrayList<Question_board> list){
+//
+//        switch (tui.playerInput().toLowerCase()) {
+//            case "play":
+//                tui.loader();
+//                playBoardAndGetCategories(player, list, numberOfAnswers);
+//                break;
+//            case "help":
+//                tui.loader();
+//                tui.getHelp();
+//                startGame(player, list);
+//                break;
+//            case "score":
+//                tui.getScore(player);
+//                startGame(player, list);
+//                break;
+//            case "board":
+//                tui.getBoardStatus(numberOfAnswers);
+//                startGame(player, list);
+//                break;
+//            case "exit":
+//                tui.exitGame(player.getName());
+//                break;
+//            default:
+//                tui.gameDefaultMessage();
+//                startGame(player, list);
+//        }
+//
+//    }
 
 //    public void playBoardAndGetCategories(Player player, ArrayList<Question_board> list, int boardStatus){
 //

@@ -103,6 +103,7 @@ public class TUI {
     //Game default message
     public void gameDefaultMessage(){
         System.out.println("");
+        System.out.println("Wrong input....");
         System.out.println("Do you need help? Then just write [help], or [exit] to end the game.");
     }
 
