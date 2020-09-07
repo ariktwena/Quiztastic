@@ -16,8 +16,8 @@ public class TUIcontroller {
 
     BoardController boardController = new BoardController();
 
+    //State
     int numberOfAnswers = 0;
-
     boolean gameStart = false;
 
 
