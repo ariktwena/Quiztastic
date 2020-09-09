@@ -4,6 +4,7 @@ import quiztastic.core.Player;
 import quiztastic.core.Question_board;
 import quiztastic.core.TUI;
 
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -22,47 +23,47 @@ public class TUIcontroller {
 
 
     //Create player
-    public Player createPlayer(){
+    public Player createPlayer(Socket socket){
 
         //Create player name
-        player = new Player(tui.getPlayerName());
+        player = new Player(tui.getPlayerName(socket));
 
         //Return player
         return player;
     }
 
     //Creates the playing board from a list og questions
-    public void loadBoard(ArrayList<Question_board> list){
+    public void loadBoard(ArrayList<Question_board> list, Socket socket){
 
         //Displays the bord to the player
-        boardController.createBoard(list);
+        boardController.createBoard(list, socket);
     }
 
     //Starts the UI game
-    public void startGame(Player player, ArrayList<Question_board> list){
+    public void startGame(Player player, ArrayList<Question_board> list, Socket socket){
 
         //Player start game choice
-        String playerStartChoice = tui.playerInput().toLowerCase();
+        String playerStartChoice = tui.playerInput(socket).toLowerCase();
 
         //If the player write "play" the game starts
         if(playerStartChoice.equalsIgnoreCase("play")){
 
             //Game starts
-            playBoardAndGetCategories(player, list, numberOfAnswers);
+            playBoardAndGetCategories(player, list, numberOfAnswers, socket);
 
         } else {
 
             //If the player answer doesn't match the answerIndex, we got to the switch statements
-            getSwitch(player, list, numberOfAnswers, playerStartChoice);
+            getSwitch(player, list, numberOfAnswers, playerStartChoice, socket);
 
             //Go back to category choice via "redirect
-            redirectAfterSwitch(player, list, numberOfAnswers, gameStart);
+            redirectAfterSwitch(player, list, numberOfAnswers, gameStart, socket);
         }
 
     }
 
     //Show the board categories and selector to the player
-    public void playBoardAndGetCategories(Player player, ArrayList<Question_board> list, int numberOfAnswers){
+    public void playBoardAndGetCategories(Player player, ArrayList<Question_board> list, int numberOfAnswers, Socket socket){
 
         int index_start, index_end;
 
@@ -72,13 +73,13 @@ public class TUIcontroller {
         if (numberOfAnswers != 30) {
 
             //Load the current status of the board
-            loadBoard(list);
+            loadBoard(list, socket);
 
             //A list of the answers possibilities for the categories/questions
             List<String> answerIndex = List.of("a", "b", "c", "d", "e", "f");
 
             //Player category choice
-            String playerCategoryChoice = tui.playerCategoryInput().toLowerCase();
+            String playerCategoryChoice = tui.playerCategoryInput(socket).toLowerCase();
 
             //We check if the players input is on the list and return the index number. Else it returns -1
             int input_index_categoty = answerIndex.lastIndexOf(playerCategoryChoice);
@@ -93,16 +94,16 @@ public class TUIcontroller {
                 index_end = 5 + (5 * input_index_categoty);
 
                 //Get the category title to display
-                tui.getCategoryTitle(index_start, list);
+                tui.getCategoryTitle(index_start, list, socket);
 
                 //Get the available questions and non if they are answered
-                tui.availableQuestionsInCategory(index_start, index_end, list);
+                tui.availableQuestionsInCategory(index_start, index_end, list, socket);
 
                 //Next phase where we play the questions.. new array
                 //playQuestions(player, list, index_start, boardStatus);
 
                 //Player Question choice
-                String playerQuestionChoice = tui.playerQuestionInputChoice().toLowerCase();
+                String playerQuestionChoice = tui.playerQuestionInputChoice(socket).toLowerCase();
 
                 //We check if the players input is on the list and return the index number. Else it returns -1
                 int input_index_question = answerIndex.lastIndexOf(playerQuestionChoice);
@@ -114,40 +115,40 @@ public class TUIcontroller {
                     int question_index = input_index_question;
 
                     //We check if the question is NOT answered og else the methode will display a message to the player
-                    if(tui.getTheQuestion(list, index_start, question_index)){
+                    if(tui.getTheQuestion(list, index_start, question_index, socket)){
 
                         //Player answer
-                        String answer = tui.playerQuestionInputAnswer();
+                        String answer = tui.playerQuestionInputAnswer(socket);
 
                         //We check if the players answer matches the right answer
-                        tui.validateAnswer(list, index_start, question_index, answer, player);
+                        tui.validateAnswer(list, index_start, question_index, answer, player, socket);
 
                         //We update the number of questions that have been played
                         numberOfAnswers += 1;
                     };
 
                     //We restart the categories by showing the "loader"
-                    tui.loaderLong();
+                    tui.loaderLong(socket);
 
                     //Go back to category choice via "redirect
-                    redirectAfterSwitch(player, list, numberOfAnswers, gameStart);
+                    redirectAfterSwitch(player, list, numberOfAnswers, gameStart, socket);
 
                 } else {
 
                     //If the player answer doesn't match the answerIndex, we got to the switch statements
-                    getSwitch(player, list, numberOfAnswers, playerQuestionChoice);
+                    getSwitch(player, list, numberOfAnswers, playerQuestionChoice, socket);
 
                     //Go back to category choice via "redirect
-                    redirectAfterSwitch(player, list, numberOfAnswers, gameStart);
+                    redirectAfterSwitch(player, list, numberOfAnswers, gameStart, socket);
 
                 }
             } else {
 
                 //If the player answer doesn't match the answerIndex, we got to the switch statements
-                getSwitch(player, list, numberOfAnswers, playerCategoryChoice);
+                getSwitch(player, list, numberOfAnswers, playerCategoryChoice, socket);
 
                 //Go back to category choice via "redirect
-                redirectAfterSwitch(player, list, numberOfAnswers, gameStart);
+                redirectAfterSwitch(player, list, numberOfAnswers, gameStart, socket);
 
             }
         } else {
@@ -158,40 +159,40 @@ public class TUIcontroller {
         }
     }
 
-    public void getSwitch(Player player, ArrayList<Question_board> list, int numberOfAnswers, String playerInput){
+    public void getSwitch(Player player, ArrayList<Question_board> list, int numberOfAnswers, String playerInput, Socket socket){
         switch (playerInput) {
             case "help":
-                tui.loader();
-                tui.getHelpGame();
+                tui.loader(socket);
+                tui.getHelpGame(socket);
                 break;
             case "score":
-                tui.getScore(player);
+                tui.getScore(player, socket);
                 break;
             case "board":
-                tui.getBoardStatus(numberOfAnswers);
+                tui.getBoardStatus(numberOfAnswers, socket);
                 break;
             case "back":
-                tui.loader();
-                playBoardAndGetCategories(player, list, numberOfAnswers);
+                tui.loader(socket);
+                playBoardAndGetCategories(player, list, numberOfAnswers, socket);
             case "exit":
-                tui.exitGame(player.getName());
+                tui.exitGame(player.getName(), socket);
                 break;
             default:
-                tui.gameDefaultMessage();
+                tui.gameDefaultMessage(socket);
         }
     }
 
-    public void redirectAfterSwitch(Player player, ArrayList<Question_board> list, int numberOfAnswers, boolean gameStart){
+    public void redirectAfterSwitch(Player player, ArrayList<Question_board> list, int numberOfAnswers, boolean gameStart, Socket socket){
         //Checks if the game has started though the gameStart boolean
         if(gameStart){
 
             //Redirects to the category selector
-            playBoardAndGetCategories(player, list, numberOfAnswers);
+            playBoardAndGetCategories(player, list, numberOfAnswers, socket);
 
         } else {
 
             //Redirects to the start game screen where you can write "play"
-            startGame(player, list);
+            startGame(player, list, socket);
 
         }
     }

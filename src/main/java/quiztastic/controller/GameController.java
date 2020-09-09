@@ -7,6 +7,7 @@ import quiztastic.core.*;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.Socket;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,7 +31,7 @@ public class GameController {
     //New TUI controller class
     TUIcontroller tuiController = new TUIcontroller();
 
-    public void init(InputStream inputStream) throws IOException, ParseException {
+    public void init(InputStream inputStream, Socket socket) throws IOException, ParseException {
 
         /**
          *
@@ -78,7 +79,7 @@ public class GameController {
          *
          */
 
-        Player player = tuiController.createPlayer();
+        Player player = tuiController.createPlayer(socket);
 
         /**
          *
@@ -125,7 +126,7 @@ public class GameController {
 //        }
 
         //Start the easy game
-        tuiController.startGame(player, easyBoardQuestions);
+        tuiController.startGame(player, easyBoardQuestions, socket);
 
 
         /**
@@ -135,7 +136,7 @@ public class GameController {
          */
 
         //Message before the hard board
-        tuiController.tui.getHardBoardMessage();
+        tuiController.tui.getHardBoardMessage(socket);
 
         //Question array variable, so we can modify det original
         ArrayList<Question> hardQuestionsModList;
@@ -175,7 +176,7 @@ public class GameController {
 //        }
 
         //Start the hard game
-        tuiController.startGame(player, hardBoardQuestions);
+        tuiController.startGame(player, hardBoardQuestions, socket);
 
 
         /**
