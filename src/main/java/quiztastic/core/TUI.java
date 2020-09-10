@@ -6,11 +6,18 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.PortUnreachableException;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class TUI {
 
+    private  final PrintWriter writer;
+    private final Scanner scanner;
+
+    public TUI() {
+
+    }
 
     public void halloWorld(Socket socket) throws IOException {
         PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
@@ -132,11 +139,11 @@ public class TUI {
             writer.println("");
             writer.println("I have never met a successful person that was a quitter. Successful people never, ever, give up! " + name);
             writer.flush();
-            System.exit(0);
+            socket.close();
+            //System.exit(0);
         } catch (IOException e) {
-            e.printStackTrace();
+            new UnsupportedOperationException("The socket was closed" + e.getMessage());
         }
-
     }
 
     //Get player score
@@ -386,6 +393,7 @@ public class TUI {
             PrintWriter writer = new PrintWriter(socket.getOutputStream());
             writer.println("");
             writer.println("You have reached the hard part of the game. You will now be tested on the hardest questions for maximum prizes :)");
+            writer.println("Write [play] to start the game or [help] to see your options.");
             writer.flush();
 
         } catch (IOException e) {

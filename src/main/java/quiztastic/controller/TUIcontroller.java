@@ -11,7 +11,8 @@ import java.util.Scanner;
 
 public class TUIcontroller {
 
-    TUI tui = new TUI();
+
+    private final TUI tui;
 
     Player player;
 
@@ -20,6 +21,9 @@ public class TUIcontroller {
     //State
     int numberOfAnswers = 0;
     boolean gameStart = false;
+
+    public TUIcontroller() {
+    }
 
 
     //Create player
@@ -60,6 +64,8 @@ public class TUIcontroller {
             redirectAfterSwitch(player, list, numberOfAnswers, gameStart, socket);
         }
 
+
+
     }
 
     //Show the board categories and selector to the player
@@ -99,9 +105,6 @@ public class TUIcontroller {
                 //Get the available questions and non if they are answered
                 tui.availableQuestionsInCategory(index_start, index_end, list, socket);
 
-                //Next phase where we play the questions.. new array
-                //playQuestions(player, list, index_start, boardStatus);
-
                 //Player Question choice
                 String playerQuestionChoice = tui.playerQuestionInputChoice(socket).toLowerCase();
 
@@ -125,7 +128,7 @@ public class TUIcontroller {
 
                         //We update the number of questions that have been played
                         numberOfAnswers += 1;
-                    };
+                    }
 
                     //We restart the categories by showing the "loader"
                     tui.loaderLong(socket);
@@ -157,6 +160,7 @@ public class TUIcontroller {
             numberOfAnswers = 0;
 
         }
+
     }
 
     public void getSwitch(Player player, ArrayList<Question_board> list, int numberOfAnswers, String playerInput, Socket socket){
@@ -174,6 +178,7 @@ public class TUIcontroller {
             case "back":
                 tui.loader(socket);
                 playBoardAndGetCategories(player, list, numberOfAnswers, socket);
+                break;
             case "exit":
                 tui.exitGame(player.getName(), socket);
                 break;

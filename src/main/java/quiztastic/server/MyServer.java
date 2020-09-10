@@ -78,7 +78,7 @@ public class MyServer implements Runnable{
 //                printOut.flush();
 //
 //            }
-
+//
             //We close the socket (We get to is when we write "quit")
             socket.close();
 

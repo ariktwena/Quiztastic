@@ -7,6 +7,7 @@ import quiztastic.core.Question_board;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -101,14 +102,14 @@ public class BoardController {
     }
 
     //public void createBoard(ArrayList<Question> list, int cat1, int cat2, int cat3, int cat4, int cat5, int cat6){
-    public void createBoard(ArrayList<Question_board> list, Socket socket){
+    public void createBoard(ArrayList<Question_board> list, Socket socket) {
 
         //We create a new board object
         board = new Board();
 
         try{
 
-            PrintWriter writer = new PrintWriter(socket.getOutputStream(), true);
+            PrintWriter writer = new PrintWriter(socket.getOutputStream());
 
             //We print the header of the board (The list has 30 spots. Every 5 spot is a now line of questions)
             writer.println(board.getHeader());
